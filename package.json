@@ -1,6 +1,7 @@
 {
   "name": "GameApp",
   "version": "1.0.0",
+  "homepage": "https://cptswift.github.io/GameApp/",
   "description": "",
   "main": "index.js",
   "scripts": {
