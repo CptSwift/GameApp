@@ -11,7 +11,7 @@ const vuePlugin = new VueLoaderPlugin()
 
 module.exports = {
 	mode: 'development',
-	entry: path.resolve(__dirname, 'src/js/index.js'), // 项目入口文件
+	entry: path.resolve(__dirname, 'src/index.js'), // 项目入口文件
 	output: { // 指定输出选项
 		path: path.join(__dirname, './dist'), // 输出路径
 		filename: 'bundle.js' // 指定输出文件的名称
