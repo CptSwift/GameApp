@@ -1,22 +1,19 @@
 <template>
-	<div class="select_container">
-		<canvas id="ch1" class="select" :style="style" @click="choose(1)"></canvas>
-		<canvas id="ch2" class="select" :style="style" @click="choose(2)"></canvas>
-		<canvas id="ch3" class="select" :style="style" @click="choose(3)"></canvas>
-		<canvas id="ch4" class="select" :style="style" @click="choose(4)"></canvas>
+	<div>
+		<div class="select_container">
+			<canvas id="ch1" class="select" :width="width" :height="height" @click="choose(1)"></canvas>
+			<canvas id="ch2" class="select" :width="width" :height="height" @click="choose(2)"></canvas>
+			<canvas id="ch3" class="select" :width="width" :height="height" @click="choose(3)"></canvas>
+			<canvas id="ch4" class="select" :width="width" :height="height" @click="choose(4)"></canvas>
+		</div>
+		<router-link tag="div" class="button" to="/games/jump_start"></router-link>
 	</div>
-	
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				ctx1: null,
-				ctx2: null,
-				ctx3: null,
-				ctx4: null,
-				
 				person1: null,
 				person2: null,
 				
@@ -30,17 +27,20 @@
 			}
 		},
 		computed: {
-			style() {
-				let screen_h = document.documentElement.clientHeight || document.body.clientHeight
-        		let canvas_h = (screen_h - 180) / 2 
+			width() {
         		let screen_w = document.documentElement.clientWidth || document.body.clientWidth
         		let canvas_w = screen_w / 2 
-        		return `width: ${ canvas_w }px; height: ${ canvas_h }px`
+        		return `${ canvas_w }px`
+			},
+			height() {
+				let screen_h = document.documentElement.clientHeight || document.body.clientHeight
+        		let canvas_h = (screen_h - 250) / 2 
+        		return `${ canvas_h }px`
 			}
 		},
 		watch: {
 			choice(val, oldVal) {
-				console.log(`new:${val},old:${oldVal}`)
+				//console.log(`new:${val},old:${oldVal}`)
 				
 				let person = this['person' + val]
 				if(oldVal != null) {
@@ -56,16 +56,16 @@
 		},
 		mounted() {
 			let canvas1 = document.querySelector('#ch1')
-			this.ctx1 = canvas1.getContext('2d')
+			let ctx1 = canvas1.getContext('2d')
 						
 			let canvas2 = document.querySelector('#ch2')
-			this.ctx2 = canvas2.getContext('2d')
+			let ctx2 = canvas2.getContext('2d')
 			
 			let canvas3 = document.querySelector('#ch3')
-			this.ctx3 = canvas3.getContext('2d')
+			let ctx3 = canvas3.getContext('2d')
 			
 			let canvas4 = document.querySelector('#ch4')
-			this.ctx4 = canvas4.getContext('2d')
+			let ctx4 = canvas4.getContext('2d')
 			
 			class Person{
 				constructor(ctx, src) {
@@ -100,10 +100,10 @@
 				drawImage(image) {
 					let w = this.personWidth
 					let h = this.personHeight
-					this.ctx.clearRect(this.x0, this.y0, w, h)
+					this.ctx.clearRect(this.x0, this.y0, w*2, h*2)
 					this.ctx.drawImage(image,
 						this.index * w, this.direction * h,
-						w, h, this.x0, this.y0, w, h)
+						w, h, this.x0, this.y0, w*2, h*2)
 					if(this.index >= 3) {
 						this.index = 0
 					}
@@ -118,23 +118,27 @@
 	
 						this.personWidth = this.imageWidth / 4
 						this.personHeight = this.imageHeight / 4
+						
+						console.log(`长:${this.personWidth},宽:${this.personHeight}`)
 	
-						this.x0 = this.canvasWidth / 2 - this.personWidth / 2
-						this.y0 = this.canvasHeight / 2 - this.personHeight / 2
+						this.x0 = this.canvasWidth / 2 - this.personWidth
+						this.y0 = this.canvasHeight / 2 - this.personHeight
 	
 						this.ctx.drawImage(image,
 							0, 0,
 							this.personWidth, this.personHeight,
 							this.x0, this.y0,
-							this.personWidth, this.personHeight)
+							this.personWidth*2, this.personHeight*2)
 	
 						this.index = 0
 					})
 				}
 			}
 			
-			this.person1 = new Person(this.ctx1, require('../../../images/ironman.png'))
-			this.person2 = new Person(this.ctx2, require('../../../images/thor.png'))
+			this.person1 = new Person(ctx1, require('../../../images/ironman.png'))
+			this.person2 = new Person(ctx2, require('../../../images/thor.png'))
+			this.person3 = new Person(ctx3, require('../../../images/hulk.png'))
+			this.person4 = new Person(ctx4, require('../../../images/blackwidow.png'))
 		}
 	}
 </script>
@@ -142,14 +146,26 @@
 <style lang="scss" scoped>
 
 	.select_container{
+		background-image: url(../../../images/select_bg.jpg);
+		background-size: cover;
+		background-position: center center;
 		display: flex;
 		flex-wrap: wrap;
 		padding-bottom: 50px;
 	}
 
 	.select{
-		border: 1px solid black; 
+		border: 0px solid black; 
 		box-sizing: border-box;
+	}
+	
+	.button{
+		height: 250px; 
+		background-color: darkred;
+	}
+	
+	.button:active{
+		background-color: red
 	}
 
 </style>
