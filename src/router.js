@@ -11,7 +11,7 @@ const router = new VueRouter({
 		{ path: '/', redirect: '/games' },
 		{ path: '/games', component: GamesContainer },
 		{ path: '/games/jump', component: SelectPerson },
-		{ path: '/games/jump_start', component: JumpGame },
+		{ path: '/games/jump/jump_start', component: JumpGame },
 		{ path: '/share', component: ShareContainer },
 		{ path: '/record', component: RecordContainer }
 	],

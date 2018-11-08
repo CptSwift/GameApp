@@ -3,7 +3,7 @@
 		<div class="mui-card" v-for="(item, i) in gamesList" :key="item.id">
 			<router-link tag="div" :to="{path: item.linker}"> 
 				<div class="mui-card-header"><b>{{ item.name }}</b></div>
-				<div class="mui-card-header mui-card-media" style="height:40vw; background-image:item.img_src"></div>
+				<div class="mui-card-header mui-card-media" style="height:40vw; background-image:url(../../images/dragon.jpg)"></div>
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
 						<p>Posted on {{ item.time }}</p>
@@ -45,6 +45,7 @@
 	.games_container{
 		background-color: #eee;
 		overflow: hidden;
-		padding-bottom: 50px;
+		padding-bottom: 50px;  /*防止拉不到最底部*/
 	}
+	
 </style>

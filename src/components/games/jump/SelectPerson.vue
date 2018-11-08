@@ -6,7 +6,7 @@
 			<canvas id="ch3" class="select" :width="width" :height="height" @click="choose(3)"></canvas>
 			<canvas id="ch4" class="select" :width="width" :height="height" @click="choose(4)"></canvas>
 		</div>
-		<router-link tag="div" class="button" to="/games/jump_start"></router-link>
+		<router-link tag="div" class="button" to="/games/jump/jump_start"></router-link>
 	</div>
 </template>
 
@@ -160,12 +160,20 @@
 	}
 	
 	.button{
-		height: 250px; 
+		height: 50px; 
+		box-sizing: border-box;
 		background-color: darkred;
+		border-top: 10px solid gray;
+		border-right: 10px solid darkslategray;
+		border-bottom: 10px solid black;
+		border-left: 10px solid black;
 	}
 	
 	.button:active{
-		background-color: red
+		border-top: 10px solid black;
+		border-right: 10px solid black;
+		border-bottom: 10px solid gray;
+		border-left: 10px solid darkslategray;
 	}
 
 </style>
