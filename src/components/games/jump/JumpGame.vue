@@ -170,8 +170,8 @@
 				}, type)
 			}
 
-			this.person = new Person(this.ctx, require('../../../images/04.png'), this, 0, 'person')
-			this.monster = new Person(this.ctx, require('../../../images/03.png'), this, 400, 'monster')
+			this.person = new Person(this.ctx, require('../../../images/ironman.png'), this, 0, 'person')
+			this.monster = new Person(this.ctx, require('../../../images/captainamerica.png'), this, 400, 'monster')
 
 			setInterval(() => {
 				this.monster.index++

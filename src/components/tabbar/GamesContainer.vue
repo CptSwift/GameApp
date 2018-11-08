@@ -1,7 +1,7 @@
 <template>
 	<div class="games_container">
 		<div class="mui-card" v-for="(item, i) in gamesList" :key="item.id">
-			<router-link tag="div" :to="{path: item.linker}">
+			<router-link tag="div" :to="{path: item.linker}"> 
 				<div class="mui-card-header"><b>{{ item.name }}</b></div>
 				<div class="mui-card-header mui-card-media" style="height:40vw; background-image:item.img_src"></div>
 				<div class="mui-card-content">
@@ -45,5 +45,6 @@
 	.games_container{
 		background-color: #eee;
 		overflow: hidden;
+		padding-bottom: 50px;
 	}
 </style>

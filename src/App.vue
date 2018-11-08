@@ -12,6 +12,10 @@
 
 
     <nav class="mui-bar mui-bar-tab">
+    	<router-link class="mui-tab-item-remake" to="/share">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">分享</span>
+      </router-link>
       <router-link class="mui-tab-item-remake" to="/games">
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">游戏</span>
