@@ -144,18 +144,19 @@
 </script>
 
 <style lang="scss" scoped>
-
 	.select_container{
 		background-image: url(../../../images/select_bg.jpg);
 		background-size: cover;
 		background-position: center center;
 		display: flex;
+		display: -webkit-flex;
 		flex-wrap: wrap;
 		padding-bottom: 50px;
 	}
 
 	.select{
-		border: 0px solid black; 
+		position: relative;
+		/*border: 1px solid black;*/
 		box-sizing: border-box;
 	}
 	

@@ -40,14 +40,14 @@
 			jump() {
 				this.jumping = true
 				
-				let v1 = 40, a = 5
+				let v_jump = 40, a = 10
 				if(this.interval) clearInterval(this.interval)
 				this.interval = setInterval(() => {
-					let v = 10
+					let v_mon = this.randomNum(20,40)
 					this.monster.index++
 					this.monster.direction = 1
-					this.monster.pos[0] -= v
-					this.monster.pos[2] -= v
+					this.monster.pos[0] -= v_mon
+					this.monster.pos[2] -= v_mon
 					this.monster.drawImage(this.monster.image)
 	
 					if(!this.jumping) {
@@ -58,12 +58,12 @@
 					}
 					if(this.jumping || this.start){
 						this.start = false
-						this.person.pos[1] -= v1
-						this.person.pos[3] -= v1
+						this.person.pos[1] -= v_jump
+						this.person.pos[3] -= v_jump
 						this.person.direction = 2
 						this.person.drawImage(this.person.image)
 						this.judgeFail()
-						v1 -= a
+                        v_jump -= a
 						if(this.person.pos[1] >= this.person.y0) {
 							this.jumping = false
 						}
