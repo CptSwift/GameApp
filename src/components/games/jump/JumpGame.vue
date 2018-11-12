@@ -1,5 +1,6 @@
 <template>
 	<div @click="jump">
+		<score_box :score="score"></score_box>
 <!--		<canvas id="background" :width="width" :height="height"></canvas>-->
 		<canvas id="person" :width="width" :height="height"></canvas>
 		<canvas id="monster" :width="width" :height="height"></canvas>
@@ -8,6 +9,8 @@
 </template>
 
 <script>
+	import score_box from '@/components/subcomponents/score_box.vue'
+	
 	export default {
 		data() {
 			return {
@@ -16,7 +19,8 @@
 				jumping: false,
 				interval: null,
 				start: true,
-				appear: 0
+				appear: 0,
+				score: 0
 			}
 		},
 		computed: {
@@ -36,6 +40,9 @@
 				return `top:${ top }px`
 			}
 		},
+		components: {
+			score_box
+		},
 		methods: {
 			jump() {
 				this.jumping = true
@@ -43,6 +50,7 @@
 				let v_jump = 40, a = 10
 				if(this.interval) clearInterval(this.interval)
 				this.interval = setInterval(() => {
+					this.score++
 					let v_mon = this.randomNum(20,40)
 					this.monster.index++
 					this.monster.direction = 1

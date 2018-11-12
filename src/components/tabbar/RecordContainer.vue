@@ -3,6 +3,13 @@
 </template>
 
 <script>
+	import default {
+		data() {
+			return {
+				
+			}
+		}
+	}
 </script>
 
 <style>

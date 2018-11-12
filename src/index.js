@@ -12,6 +12,23 @@ import router from '@/router'
 Vue.use(VueRouter)
 Vue.use(MintUI)
 
+let record = JSON.parseInt(localStorage.getItem('records') || [])
+
+let store = new Vuex.Store({
+	state: {
+		records: records
+	},
+	mutations: {
+		addToRecord(state, record){
+			state.records.push(record)
+			localStorage.setItem('records', JSON.stringify(state.records))
+		}
+	},
+	getters: {
+		
+	}
+})
+
 const vm = new Vue({
 	el: '#app',
 	render: c => c(app),
