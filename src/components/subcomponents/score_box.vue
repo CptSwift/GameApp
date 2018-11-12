@@ -6,9 +6,7 @@
 
 <script>
 	export default {
-		props: [
-			"score"
-		],
+		props: ['score'],
 		computed: {
 			width() {
         		let screen_w = document.documentElement.clientWidth || document.body.clientWidth

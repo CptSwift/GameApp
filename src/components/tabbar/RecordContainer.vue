@@ -1,14 +1,11 @@
 <template>
-	<div>
+	<div class="record-container">
 		<div class="mui-card" v-for="(item, i) in records" :key="item.id">
+			<div class="mui-card-header">{{ item.name }}</div>
 			<div class="mui-card-content">
-				<div class="mui-card-content-inner">
-					<div class="info">
-						<h1>{{ item.name }}</h1>
-						<h1>{{ item.score }}</h1>
-					</div>
-				</div>
+				<div class="mui-card-content-inner">{{ item.score }}</div>
 			</div>
+			<div class="mui-card-footer">{{ item.time }}</div>
 		</div>
 	</div>
 </template>
@@ -36,5 +33,10 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	.record-container{
+		background-color: #eee;
+		overflow: hidden;
+		padding-bottom: 50px;  /*防止拉不到最底部*/
+	}
 </style>

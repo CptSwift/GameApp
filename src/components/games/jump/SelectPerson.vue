@@ -6,7 +6,7 @@
 			<canvas id="ch3" class="select" :width="width" :height="height" @click="choose(3)"></canvas>
 			<canvas id="ch4" class="select" :width="width" :height="height" @click="choose(4)"></canvas>
 		</div>
-		<router-link tag="div" class="button" to="/games/jump/jump_start"></router-link>
+		<router-link tag="div" class="button" :to="'/games/jump_start?id=' + id + '&name=' + name"></router-link>
 	</div>
 </template>
 
@@ -14,9 +14,10 @@
 	export default {
 		data() {
 			return {
+			    id: null,
+				name: null,
 				person1: null,
 				person2: null,
-				
 				choice: null
 			}
 		},
@@ -53,6 +54,10 @@
 					person.drawImage(person.image)
 				}, 100)
 			}
+		},
+		created(){
+            this.id = this.$route.query.id
+            this.name = this.$route.query.name
 		},
 		mounted() {
 			let canvas1 = document.querySelector('#ch1')

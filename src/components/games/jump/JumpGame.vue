@@ -14,8 +14,8 @@
 	export default {
 		data() {
 			return {
-			    id: 0,
-				name: '跳一跳',
+			    id: null,
+				name: null,
 				person: null,
 				monster: null,
 				jumping: false,
@@ -110,7 +110,8 @@
 					let record = {
 					    id: this.id,
 						name: this.name,
-						score: this.score
+						score: this.score,
+						time: new Date()
 					}
 					this.$store.commit('addToRecord', record)
 
@@ -180,6 +181,10 @@
 //					}
 //				}, 100)
 			}
+		},
+		created() {
+            this.id = this.$route.query.id
+			this.name = this.$route.query.name
 		},
 		mounted() {
 			let person_canvas = document.querySelector('#person')

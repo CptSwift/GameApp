@@ -1,7 +1,7 @@
 <template>
 	<div class="games_container">
 		<div class="mui-card" v-for="(item, i) in gamesList" :key="item.id">
-			<router-link tag="div" :to="{path: item.linker}"> 
+			<router-link tag="div" :to="{path: item.linker, query: {id: item.id, name: item.name}}">
 				<div class="mui-card-header"><b>{{ item.name }}</b></div>
 				<div class="mui-card-header mui-card-media" style="height:40vw; background-image:url(../../images/dragon.jpg)"></div>
 				<div class="mui-card-content">
