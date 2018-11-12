@@ -14,6 +14,8 @@
 	export default {
 		data() {
 			return {
+			    id: 0,
+				name: '跳一跳',
 				person: null,
 				monster: null,
 				jumping: false,
@@ -102,7 +104,16 @@
 						hh+=20
 						ctx.fillRect(0, 0, w, hh);
 						if(hh >= h) clearInterval(this.interval)
-					},100)					
+					},100)
+
+					//分数计入记录
+					let record = {
+					    id: this.id,
+						name: this.name,
+						score: this.score
+					}
+					this.$store.commit('addToRecord', record)
+
 				}
 			},
 			randomNum(minNum,maxNum) { 

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 import MintUI from 'mint-ui'
 
 import '@/lib/mui/css/mui.min.css'
@@ -11,8 +12,9 @@ import router from '@/router'
 
 Vue.use(VueRouter)
 Vue.use(MintUI)
+Vue.use(Vuex)
 
-let record = JSON.parseInt(localStorage.getItem('records') || [])
+let records = JSON.parse(localStorage.getItem('records') || '[]')
 
 let store = new Vuex.Store({
 	state: {
@@ -32,5 +34,6 @@ let store = new Vuex.Store({
 const vm = new Vue({
 	el: '#app',
 	render: c => c(app),
-	router
+	router,
+	store
 })
