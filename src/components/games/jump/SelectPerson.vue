@@ -1,12 +1,12 @@
 <template>
 	<div>
 		<div class="select_container">
-			<canvas id="ch1" class="select" :width="width" :height="height" @click="choose(1)"></canvas>
-			<canvas id="ch2" class="select" :width="width" :height="height" @click="choose(2)"></canvas>
-			<canvas id="ch3" class="select" :width="width" :height="height" @click="choose(3)"></canvas>
-			<canvas id="ch4" class="select" :width="width" :height="height" @click="choose(4)"></canvas>
+			<canvas id="ch1" class="select" :width="width" :height="height" @click="choose(0)"></canvas>
+			<canvas id="ch2" class="select" :width="width" :height="height" @click="choose(1)"></canvas>
+			<canvas id="ch3" class="select" :width="width" :height="height" @click="choose(2)"></canvas>
+			<canvas id="ch4" class="select" :width="width" :height="height" @click="choose(3)"></canvas>
 		</div>
-		<router-link tag="div" class="button" :to="'/games/jump_start?id=' + id + '&name=' + name"></router-link>
+		<router-link tag="div" class="button" :to="'/games/jump_start?id=' + id + '&name=' + name "></router-link>
 	</div>
 </template>
 
@@ -16,8 +16,17 @@
 			return {
 			    id: null,
 				name: null,
+				persons:[
+					{model: null, src: '../../../images/ironman.png'},
+					{model: null, src: '../../../images/thor.png'},
+					{model: null, src: '../../../images/hulk.png'},
+					{model: null, src: '../../../images/blackwidow.png'},
+				],
+				src: null,
 				person1: null,
 				person2: null,
+				person3: null,
+				person4: null,
 				choice: null
 			}
 		},
@@ -43,9 +52,11 @@
 			choice(val, oldVal) {
 				//console.log(`new:${val},old:${oldVal}`)
 				
-				let person = this['person' + val]
+				//let person = this['person' + val]
+				let person = this.persons[val].model
 				if(oldVal != null) {
-					clearInterval(this['person' + oldVal].interval)
+					//clearInterval(this['person' + oldVal].interval)
+					clearInterval(person.interval)
 				}
 					
 				person.interval = setInterval(() => {
@@ -58,6 +69,7 @@
 		created(){
             this.id = this.$route.query.id
             this.name = this.$route.query.name
+            this.src = this.persons[0].src
 		},
 		mounted() {
 			let canvas1 = document.querySelector('#ch1')
@@ -140,10 +152,12 @@
 				}
 			}
 			
-			this.person1 = new Person(ctx1, require('../../../images/ironman.png'))
-			this.person2 = new Person(ctx2, require('../../../images/thor.png'))
-			this.person3 = new Person(ctx3, require('../../../images/hulk.png'))
-			this.person4 = new Person(ctx4, require('../../../images/blackwidow.png'))
+			this.person[0].model = new Person(ctx1, require('../../../images/ironman.png'))
+			this.person[1].model = new Person(ctx2, require('../../../images/thor.png'))
+			this.person[2].model = new Person(ctx3, require('../../../images/hulk.png'))
+			this.person[3].model = new Person(ctx4, require('../../../images/blackwidow.png'))
+		
+			this.choice = 0
 		}
 	}
 </script>
@@ -166,7 +180,7 @@
 	}
 	
 	.button{
-		height: 50px; 
+		height: 110px; 
 		box-sizing: border-box;
 		background-color: darkred;
 		border-top: 10px solid gray;

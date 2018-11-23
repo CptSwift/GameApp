@@ -16,6 +16,7 @@
 			return {
 			    id: null,
 				name: null,
+				src: null,
 				person: null,
 				monster: null,
 				jumping: false,
@@ -185,6 +186,7 @@
 		created() {
             this.id = this.$route.query.id
 			this.name = this.$route.query.name
+			this.src = this.$route.query.src
 		},
 		mounted() {
 			let person_canvas = document.querySelector('#person')
@@ -296,7 +298,7 @@
 				}
 			}
 
-			this.person = new Person(person_ctx, require('../../../images/ironman.png'), 0)
+			this.person = new Person(person_ctx, this.src, 0)
 			this.monster = new Person(monster_ctx, require('../../../images/captainamerica.png'), 400)
 
 //			this.monster.interval = setInterval(() => {
