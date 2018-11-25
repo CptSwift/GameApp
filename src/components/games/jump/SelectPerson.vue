@@ -6,21 +6,29 @@
 			<canvas id="ch3" class="select" :width="width" :height="height" @click="choose(2)"></canvas>
 			<canvas id="ch4" class="select" :width="width" :height="height" @click="choose(3)"></canvas>
 		</div>
-		<router-link tag="div" class="button" :to="'/games/jump_start?id=' + id + '&name=' + name "></router-link>
+		<!--<router-link tag="div" class="button" :to="'/games/jump_start?id=' + id + '&name=' + name "></router-link>-->
+		<router-link class="button button-enable" v-if="src" tag="div" :to="{ path: '/games/jump_start', query: { id: id, name: name, src: src }}"></router-link>
+		<div class="button button-disable" v-else></div>
 	</div>
 </template>
 
 <script>
+	import {Toast} from "mint-ui"
+	import ironman from "@/images/ironman.png"
+    import thor from "@/images/thor.png"
+    import hulk from "@/images/hulk.png"
+    import blackwidow from "@/images/blackwidow.png"
+
 	export default {
 		data() {
 			return {
 			    id: null,
 				name: null,
 				persons:[
-					{model: null, src: '../../../images/ironman.png'},
-					{model: null, src: '../../../images/thor.png'},
-					{model: null, src: '../../../images/hulk.png'},
-					{model: null, src: '../../../images/blackwidow.png'},
+					{model: null, src: ironman},
+					{model: null, src: thor},
+					{model: null, src: hulk},
+					{model: null, src: blackwidow},
 				],
 				src: null,
 				person1: null,
@@ -56,7 +64,7 @@
 				let person = this.persons[val].model
 				if(oldVal != null) {
 					//clearInterval(this['person' + oldVal].interval)
-					clearInterval(person.interval)
+					clearInterval(this.persons[oldVal].model.interval)
 				}
 					
 				person.interval = setInterval(() => {
@@ -64,12 +72,14 @@
 					person.direction = 0
 					person.drawImage(person.image)
 				}, 100)
+
+				this.src = this.persons[val].src
 			}
 		},
 		created(){
             this.id = this.$route.query.id
             this.name = this.$route.query.name
-            this.src = this.persons[0].src
+            //this.src = this.persons[0].src
 		},
 		mounted() {
 			let canvas1 = document.querySelector('#ch1')
@@ -152,12 +162,12 @@
 				}
 			}
 			
-			this.person[0].model = new Person(ctx1, require('../../../images/ironman.png'))
-			this.person[1].model = new Person(ctx2, require('../../../images/thor.png'))
-			this.person[2].model = new Person(ctx3, require('../../../images/hulk.png'))
-			this.person[3].model = new Person(ctx4, require('../../../images/blackwidow.png'))
+			this.persons[0].model = new Person(ctx1, this.persons[0].src)
+			this.persons[1].model = new Person(ctx2, this.persons[1].src)
+			this.persons[2].model = new Person(ctx3, this.persons[2].src)
+			this.persons[3].model = new Person(ctx4, this.persons[3].src)
 		
-			this.choice = 0
+			//this.choice = 0
 		}
 	}
 </script>
@@ -179,21 +189,37 @@
 		box-sizing: border-box;
 	}
 	
-	.button{
-		height: 110px; 
+	.button {
+		height: 110px;
 		box-sizing: border-box;
-		background-color: darkred;
-		border-top: 10px solid gray;
-		border-right: 10px solid darkslategray;
-		border-bottom: 10px solid black;
-		border-left: 10px solid black;
+		border: {
+			width: 10px;
+			style: solid;
+			top-color: gray;
+			right-color: darkslategray;
+			bottom-color: black;
+			left-color: black;
+		}
 	}
+		.button-enable{
+			background-color: darkred;
+			&:active{
+				border-top: 10px solid black;
+				border-right: 10px solid black;
+				border-bottom: 10px solid gray;
+				border-left: 10px solid darkslategray;
+			}
+		}
+		.button-disable{
+			background-color: #666666;
+		}
+
 	
-	.button:active{
-		border-top: 10px solid black;
-		border-right: 10px solid black;
-		border-bottom: 10px solid gray;
-		border-left: 10px solid darkslategray;
-	}
+	/*.button-enable:active{*/
+		/*border-top: 10px solid black;*/
+		/*border-right: 10px solid black;*/
+		/*border-bottom: 10px solid gray;*/
+		/*border-left: 10px solid darkslategray;*/
+	/*}*/
 
 </style>
