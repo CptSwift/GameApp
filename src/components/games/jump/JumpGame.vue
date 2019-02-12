@@ -1,6 +1,6 @@
 <template>
 	<div @click="jump">
-		<score_box :score="score"></score_box>
+		<score_box :score="score" :high_score="high_score"></score_box>
 <!--		<canvas id="background" :width="width" :height="height"></canvas>-->
 		<canvas id="person" :width="width" :height="height"></canvas>
 		<canvas id="monster" :width="width" :height="height"></canvas>
@@ -23,7 +23,8 @@
 				interval: null,
 				start: true,
 				appear: 0,
-				score: 0
+				score: 0,
+				high_score: 0
 			}
 		},
 		computed: {
@@ -187,6 +188,7 @@
             this.id = this.$route.query.id
 			this.name = this.$route.query.name
 			this.src = this.$route.query.src
+			this.high_score = this.$store.state.high_records[this.id] == null ? 0 : this.$store.state.high_records[this.id].score;
 		},
 		mounted() {
 			let person_canvas = document.querySelector('#person')
