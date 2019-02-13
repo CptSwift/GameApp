@@ -21,11 +21,13 @@ Vue.filter('dataFormat', function (dataStr, pattern = "yyyy-mm-dd hh:mm:ss") {
 
 let records = JSON.parse(localStorage.getItem('records') || '[]')
 let high_records = JSON.parse(localStorage.getItem('high_records') || '{}')
+let shares = JSON.parse(localStorage.getItem('shares') || '[]')
 
 let store = new Vuex.Store({
 	state: {
 		records: records,
 		high_records: high_records
+		shares: shares
 	},
 	mutations: {
 		addToRecord(state, record){				
@@ -36,7 +38,11 @@ let store = new Vuex.Store({
 			}
 			localStorage.setItem('records', JSON.stringify(state.records))
 			localStorage.setItem('high_records', JSON.stringify(state.high_records))
-		}
+		},
+        addToShare(state, share){
+            state.records.push(share)
+            localStorage.setItem('shares', JSON.stringify(state.shares))
+        }
 	},
 	getters: {
 		

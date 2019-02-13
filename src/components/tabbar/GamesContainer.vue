@@ -35,7 +35,14 @@
 					des: '风行文曲星学习机的上古游戏',
 					linker: '/games/jump',
 					img_src: '../../images/dragon.jpg'
-				}]
+				},{
+                    id: 3,
+                    time: '2018-1-1',
+                    name: 'Flappy Bird',
+                    des: '风靡一时的像素鸟',
+                    linker: '/games/bird',
+                    img_src: '../../images/dragon.jpg'
+                }]
 			}
 		}
 	};

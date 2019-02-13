@@ -7,7 +7,7 @@
 				<div class="mui-card-content-inner">时间：{{ item.score | dataFormat }}</div>
 			</div>
 			<div class="mui-card-footer footer">
-				<button type="button" class="mui-btn mui-btn-outlined mui-icon mui-icon-upload button">&nbsp;分享</button>
+				<button type="button" class="mui-btn mui-btn-outlined mui-icon mui-icon-upload button" @click="share(item)">&nbsp;分享</button>
 				<div class="divide"></div>
 				<button type="button" class="mui-btn mui-btn-outlined mui-icon mui-icon-trash button">&nbsp;删除</button>
 			</div>
@@ -27,13 +27,15 @@
         },
         methods: {
             getRecords() {
-                this.records = this.$store.state.records
                 var idArr = []
                 this.$store.state.records.forEach(item => idArr.push(item.id))
                 console.log(idArr)
                 if (idArr.length <= 0) return
                 this.records = this.$store.state.records
-            }
+            },
+			share(item) {
+                this.$store.commit('addToShare', item)
+			}
         }
 	}
 </script>
