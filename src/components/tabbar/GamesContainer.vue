@@ -42,7 +42,14 @@
                     des: '风靡一时的像素鸟',
                     linker: '/games/bird',
                     img_src: '../../images/dragon.jpg'
-                }]
+                },{
+					id: 4,
+					time: '2018-1-1',
+					name: '3d游戏',
+					des: '3D',
+					linker: '/games/3d',
+					img_src: '../../images/dragon.jpg'
+				}]
 			}
 		}
 	};
