@@ -11,7 +11,7 @@
     </transition>
 
 
-    <nav class="mui-bar mui-bar-tab">
+    <nav v-show="flag" class="mui-bar mui-bar-tab">
     	<router-link class="mui-tab-item-remake" to="/share">
         <span class="mui-icon mui-icon-star"></span>
         <span class="mui-tab-label">分享</span>
@@ -37,7 +37,8 @@
 			}
 		},
 		created() {
-			if(this.$route.path == '/games'){
+		    console.log('path:' + this.$route.path);
+			if(this.$route.path.indexOf('/games/') >= 0){
 				this.flag = false
 			}
 			else{
@@ -51,7 +52,7 @@
 		},
 		watch:{
 			'$route.path':function(newVal){
-				if(newVal === "/games"){
+				if(newVal.indexOf('/games/') >= 0){
 					this.flag = false
 				}
 				else{

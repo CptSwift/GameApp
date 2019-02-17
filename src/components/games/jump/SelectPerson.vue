@@ -13,6 +13,7 @@
 </template>
 
 <script>
+    import Person from '@/components/games/game_util.js'
 	import {Toast} from "mint-ui"
 	import ironman from "@/images/ironman.png"
     import thor from "@/images/thor.png"
@@ -31,10 +32,6 @@
 					{model: null, src: blackwidow},
 				],
 				src: null,
-				person1: null,
-				person2: null,
-				person3: null,
-				person4: null,
 				choice: null
 			}
 		},
@@ -58,12 +55,8 @@
 		},
 		watch: {
 			choice(val, oldVal) {
-				//console.log(`new:${val},old:${oldVal}`)
-				
-				//let person = this['person' + val]
 				let person = this.persons[val].model
 				if(oldVal != null) {
-					//clearInterval(this['person' + oldVal].interval)
 					clearInterval(this.persons[oldVal].model.interval)
 				}
 					
@@ -82,91 +75,91 @@
             //this.src = this.persons[0].src
 		},
 		mounted() {
-			let canvas1 = document.querySelector('#ch1')
-			let ctx1 = canvas1.getContext('2d')
-						
-			let canvas2 = document.querySelector('#ch2')
-			let ctx2 = canvas2.getContext('2d')
+			let canvas0 = document.querySelector('#ch1')
+			let canvas1 = document.querySelector('#ch2')
+			let canvas2 = document.querySelector('#ch3')
+			let canvas3 = document.querySelector('#ch4')
+
+            let ctx = [canvas0.getContext('2d'), canvas1.getContext('2d'), canvas2.getContext('2d'), canvas3.getContext('2d')];
 			
-			let canvas3 = document.querySelector('#ch3')
-			let ctx3 = canvas3.getContext('2d')
+//			class Person{
+//				constructor(ctx, src) {
+//					/*获取环境变量*/
+//					//this.that = that
+//					/*绘制工具*/
+//					this.ctx = ctx || document.querySelector('canvas').getContext('2d')
+//					/*初始化图片*/
+//					this.image = new Image()
+//					/*初始化定时器*/
+//					this.interval = null
+//					/*图片路径*/
+//					this.src = src
+//					/*画布的大小*/
+//					this.canvasWidth = this.ctx.canvas.width
+//					this.canvasHeight = this.ctx.canvas.height
+//
+//					/* 0 前  1 左  2 右  3 后  和图片的行数包含的图片对应上*/
+//					this.direction = 0;
+//
+//					/*初始化方法*/
+//					this.init();
+//				}
+//
+//			    loadImage(callback) {
+//					this.image.onload = () => {
+//						callback && callback(this.image)
+//					}
+//					this.image.src = this.src
+//				}
+//
+//				drawImage(image) {
+//					let w = this.personWidth
+//					let h = this.personHeight
+//					this.ctx.clearRect(this.x0, this.y0, w*2, h*2)
+//					this.ctx.drawImage(image,
+//						this.index * w, this.direction * h,
+//						w, h, this.x0, this.y0, w*2, h*2)
+//					if(this.index >= 3) {
+//						this.index = 0
+//					}
+//				}
+//
+//				init() {
+//					this.loadImage(image => {
+//						console.log('initing...')
+//
+//						this.imageWidth = image.width
+//						this.imageHeight = image.height
+//
+//						this.personWidth = this.imageWidth / 4
+//						this.personHeight = this.imageHeight / 4
+//
+//						console.log(`长:${this.personWidth},宽:${this.personHeight}`)
+//
+//						this.x0 = this.canvasWidth / 2 - this.personWidth
+//						this.y0 = this.canvasHeight / 2 - this.personHeight
+//
+//						this.ctx.drawImage(image,
+//							0, 0,
+//							this.personWidth, this.personHeight,
+//							this.x0, this.y0,
+//							this.personWidth*2, this.personHeight*2)
+//
+//						this.index = 0
+//					})
+//				}
+//			}
 			
-			let canvas4 = document.querySelector('#ch4')
-			let ctx4 = canvas4.getContext('2d')
-			
-			class Person{
-				constructor(ctx, src) {
-					/*获取环境变量*/
-					//this.that = that
-					/*绘制工具*/
-					this.ctx = ctx || document.querySelector('canvas').getContext('2d')
-					/*初始化图片*/
-					this.image = new Image()
-					/*初始化定时器*/
-					this.interval = null
-					/*图片路径*/
-					this.src = src
-					/*画布的大小*/
-					this.canvasWidth = this.ctx.canvas.width
-					this.canvasHeight = this.ctx.canvas.height
+//			this.persons[0].model = new Person(ctx1, this.persons[0].src, false, false)
+//			this.persons[1].model = new Person(ctx2, this.persons[1].src, false, false)
+//			this.persons[2].model = new Person(ctx3, this.persons[2].src, false, false)
+//			this.persons[3].model = new Person(ctx4, this.persons[3].src, false, false)
 
-					/* 0 前  1 左  2 右  3 后  和图片的行数包含的图片对应上*/
-					this.direction = 0;
-	
-					/*初始化方法*/
-					this.init();
-				}
-
-			    loadImage(callback) {
-					this.image.onload = () => {
-						callback && callback(this.image)
-					}
-					this.image.src = this.src
-				}
-
-				drawImage(image) {
-					let w = this.personWidth
-					let h = this.personHeight
-					this.ctx.clearRect(this.x0, this.y0, w*2, h*2)
-					this.ctx.drawImage(image,
-						this.index * w, this.direction * h,
-						w, h, this.x0, this.y0, w*2, h*2)
-					if(this.index >= 3) {
-						this.index = 0
-					}
-				}
-
-				init() {
-					this.loadImage(image => {
-						console.log('initing...')
-						
-						this.imageWidth = image.width
-						this.imageHeight = image.height
-	
-						this.personWidth = this.imageWidth / 4
-						this.personHeight = this.imageHeight / 4
-						
-						console.log(`长:${this.personWidth},宽:${this.personHeight}`)
-	
-						this.x0 = this.canvasWidth / 2 - this.personWidth
-						this.y0 = this.canvasHeight / 2 - this.personHeight
-	
-						this.ctx.drawImage(image,
-							0, 0,
-							this.personWidth, this.personHeight,
-							this.x0, this.y0,
-							this.personWidth*2, this.personHeight*2)
-	
-						this.index = 0
-					})
-				}
+			for(let i = 0; i < 4; i++) {
+                this.persons[i].model = new Person(ctx[i], this.persons[i].src, false, false)
+                this.persons[i].model.changeSize(2)
 			}
-			
-			this.persons[0].model = new Person(ctx1, this.persons[0].src)
-			this.persons[1].model = new Person(ctx2, this.persons[1].src)
-			this.persons[2].model = new Person(ctx3, this.persons[2].src)
-			this.persons[3].model = new Person(ctx4, this.persons[3].src)
-		
+
 			//this.choice = 0
 		}
 	}
@@ -190,7 +183,7 @@
 	}
 	
 	.button {
-		height: 110px;
+		height: 160px;
 		box-sizing: border-box;
 		border: {
 			width: 10px;

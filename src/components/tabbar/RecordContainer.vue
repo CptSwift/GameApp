@@ -1,15 +1,15 @@
 <template>
 	<div class="record-container">
-		<div class="mui-card" v-for="(item, i) in records" :key="item.time">
+		<div class="mui-card" v-for="(item, i) in records" :key="i">
 			<div class="mui-card-header"><b>{{ item.name }}</b></div>
 			<div class="mui-card-content">
 				<div class="mui-card-content-inner">分数：{{ item.score }}</div>
-				<div class="mui-card-content-inner">时间：{{ item.score | dataFormat }}</div>
+				<div class="mui-card-content-inner">时间：{{ item.time | dataFormat }}</div>
 			</div>
 			<div class="mui-card-footer footer">
 				<button type="button" class="mui-btn mui-btn-outlined mui-icon mui-icon-upload button" @click="share(item)">&nbsp;分享</button>
 				<div class="divide"></div>
-				<button type="button" class="mui-btn mui-btn-outlined mui-icon mui-icon-trash button">&nbsp;删除</button>
+				<button type="button" class="mui-btn mui-btn-outlined mui-icon mui-icon-trash button" @click="remove(i)">&nbsp;删除</button>
 			</div>
 		</div>
 	</div>
@@ -35,6 +35,9 @@
             },
 			share(item) {
                 this.$store.commit('addToShare', item)
+			},
+            remove(index) {
+                this.$store.commit('delete', index)
 			}
         }
 	}

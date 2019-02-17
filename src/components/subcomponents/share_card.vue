@@ -19,7 +19,7 @@
     export default {
         props: {
             share: {
-                type: object,
+                type: 'object',
                 required: true
             }
         }

@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 Vue.use(MintUI)
 Vue.use(Vuex)
 
-Vue.filter('dataFormat', function (dataStr, pattern = "yyyy-mm-dd hh:mm:ss") {
+Vue.filter('dataFormat', function (dataStr, pattern = "YYYY-MM-DD hh:mm:ss") {
     return moment(dataStr).format(pattern)
 })
 
@@ -26,7 +26,7 @@ let shares = JSON.parse(localStorage.getItem('shares') || '[]')
 let store = new Vuex.Store({
 	state: {
 		records: records,
-		high_records: high_records
+		high_records: high_records,
 		shares: shares
 	},
 	mutations: {
@@ -42,7 +42,11 @@ let store = new Vuex.Store({
         addToShare(state, share){
             state.records.push(share)
             localStorage.setItem('shares', JSON.stringify(state.shares))
-        }
+        },
+		delete(state, index){
+        	state.records.splice(index, 1)
+            localStorage.setItem('records', JSON.stringify(state.records))
+		}
 	},
 	getters: {
 		

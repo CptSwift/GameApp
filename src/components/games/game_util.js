@@ -1,8 +1,8 @@
 /**
  * Created by chenz on 2019/1/3.
  */
-export class Person {
-    constructor(ctx, src, x0) {
+export default class Person {
+    constructor(ctx, src, x0, y0) {
         /*获取环境变量*/
         //this.that = that
         /*绘制工具*/
@@ -42,13 +42,15 @@ export class Person {
         this.personWidth = 0
         this.personHeight = 0
 
-        this.x0 = 0
-        this.y0 = 0
+        this.times = 1;
+
+        this.x0 = x0 || this.canvasWidth / 2 - this.personWidth
+        this.y0 = y0 || this.canvasHeight / 2 - this.personHeight
 
         this.interval = null;
 
         /*初始化方法*/
-        this.init(x0)
+        this.init()
     }
 
     loadImage(callback, type) {
@@ -65,13 +67,14 @@ export class Person {
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
         this.ctx.drawImage(image,
             this.index * w, this.direction * h,
-            w, h, this.pos[0], this.pos[1], w, h)
+            w, h, this.pos[0], this.pos[1],
+            w * this.times, h * this.times)
         if(this.index >= 3) {
             this.index = 0
         }
     }
 
-    init(x0) {
+    init() {
         this.loadImage(image => {
             this.imageWidth = image.width
             this.imageHeight = image.height
@@ -79,14 +82,11 @@ export class Person {
             this.personWidth = this.imageWidth / 4
             this.personHeight = this.imageHeight / 4
 
-            this.x0 = x0
-            this.y0 = this.canvasHeight / 2 - this.personHeight / 2
-
             this.ctx.drawImage(image,
                 0, 0,
                 this.personWidth, this.personHeight,
                 this.x0, this.y0,
-                this.personWidth, this.personHeight)
+                this.personWidth * this.times, this.personHeight * this.times)
 
             let pos = [this.x0,
                 this.y0,
@@ -98,10 +98,15 @@ export class Person {
             this.index = 0
         })
     }
+
+    changeSize(times) {
+        this.times = times
+        this.drawImage(this.image)
+    }
 }
 
-export class Thing {
-    constructor(ctx, src, x0) {
+class Thing {
+    constructor(ctx, src, x0, y0) {
         /*绘制工具*/
         this.ctx = ctx || document.querySelector('canvas').getContext('2d')
         /*图片路径*/
@@ -121,13 +126,13 @@ export class Thing {
         this.imageWidth = 0
         this.imageHeight = 0
 
-        this.x0 = 0
-        this.y0 = 0
+        this.x0 = x0 || this.canvasWidth / 2 - this.personWidth
+        this.y0 = y0 || this.canvasHeight / 2 - this.personHeight
 
         this.interval = null;
 
         /*初始化方法*/
-        this.init(x0)
+        this.init(x0, y0)
     }
 
     loadImage(callback, type) {
