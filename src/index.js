@@ -40,7 +40,7 @@ let store = new Vuex.Store({
 			localStorage.setItem('high_records', JSON.stringify(state.high_records))
 		},
         addToShare(state, share){
-            state.records.push(share)
+            state.shares.push(share)
             localStorage.setItem('shares', JSON.stringify(state.shares))
         },
 		delete(state, index){

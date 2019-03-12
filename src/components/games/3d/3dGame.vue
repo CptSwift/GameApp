@@ -56,7 +56,7 @@
             },
             initCube: function () {
                 var geometry = new THREE.BoxGeometry(10,10,10) // 创建一个长宽高都为1个单位的立方体
-                var material = new THREE.MeshBasicMaterial({color: 0x00ff00}) // 创建材质，对光照无感
+                var material = new THREE.MeshBasicMaterial({color: 0xffffff}) // 创建材质，对光照无感
                 this.mesh = new THREE.Mesh(geometry, material) // 创建一个立方体网格（mesh）,将材质包裹在立方体上
                 this.scene.add(this.mesh) // 将立方体网格添加到场景中
 
